@@ -1,6 +1,7 @@
-const loadPhone = async () => {
-    //api data load korar jonno oitar url (https://openapi.programming-hero.com/api/phones?search=iphone) copy kore fetch er moddhe past kore dite hbe r await dile aktu shmy nia load nite wait kora k bujhay.
-    const res = await fetch('https://openapi.programming-hero.com/api/phones?search=iphone');
+//--------------------------------------//
+const loadPhone = async (searchText) => {
+    //api data load korar jonno oitar url (https://openapi.programming-hero.com/api/phones?search=iphone) copy kore fetch er moddhe past kore dite hbe r await dile aktu shmy nia load nite wait kora k bujhay. tarpor search button kaj korar jonno upore loadPhone async akta paramitar dite hbe r url er last j iphone lekha chilo oita  remove daynamic vabe oi paramitar ta dite hbe. 
+    const res = await fetch(`  https://openapi.programming-hero.com/api/phones?search=${searchText}`);
    //fetch file er data json a convert korte hbe .display te dekhanor jonno .
     const data = await res.json();
     const phones = data.data;
@@ -8,10 +9,20 @@ const loadPhone = async () => {
     //paramitar hishabe call korte hbe
     diplayPhones(phones);
 }
-//kon section er vitor div gula banate hbe sheita ante hbe.
-const phoneContainer = document.getElementById('phone-container');
+//-------------------------------------//
+
+
+
+//------------------------------------//
 //foreach dia function ta dici karon akta akta kore phone ashbe mane data akta akta kore ashbe.
 const diplayPhones= phones =>{
+//------------------------------------//
+//kon section er vitor div gula banate hbe sheita ante hbe.
+const phoneContainer = document.getElementById('phone-container');
+//clear phone container cards before adding new cards mane 1st a iphone search korle iphone ashbe abr jodi samsung search kori tahole ihpone er cards gula shoray dibe r just samsung er cards gula display korbe  aita korar jonno  .textContent empty dite hbe.//
+phoneContainer.textContent = '';
+//--------------------------------//
+    
     phones.forEach(phone=>{
         console.log(phone);
         //akta akta kore notun div bananor jonno creatElement dia div banante hbe.
@@ -34,10 +45,24 @@ const diplayPhones= phones =>{
         
     })
 }
+//----------------------------------//
+
+//------------------------------------//
+//handle search button added 
+const handleSearch = () =>{
+ const searchField = document.getElementById('search-field');
+ const searchText = searchField.value;
+ //console.log(searchText);
+ 
+ //aita akdom upore ai function ta paramitar shoho call korte hbe tahole oi phone gula ba data gula search korle ashbe.
+ loadPhone(searchText);
+
+}
+//------------------------------------------//
 
 
 //data load kaj korar jonno function ta k call korte hbe.
-loadPhone();
+//loadPhone();
 
 
 
